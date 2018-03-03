@@ -35,5 +35,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        emojiTableView.deselectRow(at: IndexPath, animated: true) // so it doesn't up as grey
+        performSegue(withIdentifier: "moveSegue", sender: emojis[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let defvc = segue.destination as! DefinitionViewController
+        defvc.emoji = sender as! String
+    }
 }
 
